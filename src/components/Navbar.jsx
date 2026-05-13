@@ -282,7 +282,7 @@ export default function Navbar() {
                 <div ref={desktopDropdownRef}>
                   <button
                     onClick={() => setOpenServices(!openServices)}
-                    className={`flex cursor-pointer items-center gap-2 text-sm xl:text-base transition-colors duration-300 ${
+                    className={`flex cursor-pointer items-center gap-2 text-sm xl:text-[.9rem] transition-colors duration-300 ${
                       location.pathname.startsWith("/services") ||
                       engineeringTech.some((s) => s.path === location.pathname) ||
                       businessStrategy.some((s) => s.path === location.pathname) ||
@@ -303,9 +303,9 @@ export default function Navbar() {
                   >
                     <div className="max-w-7xl mx-auto px-6 xl:px-12 py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 xl:gap-20">
                       <div>
-                        <h3 className="text-[1.1rem] text-[var(--primary-color)] font-semibold mb-7">
+                        <h3 className="text-[1rem] text-[var(--primary-color)] font-semibold mb-5">
                           <Link to="/engineering&technology" className="flex items-center gap-1">
-                            Engineering & Technology <FiChevronRight className="text-[1.3rem]" strokeWidth={3} />
+                            Engineering & Technology <FiChevronRight className="text-[1rem]" strokeWidth={3} />
                           </Link>
                         </h3>
                         {engineeringTech.map((s, i) => (
@@ -313,7 +313,7 @@ export default function Navbar() {
                             key={i}
                             to={s.path}
                             onClick={handleNavClick(s.path, heroMap[s.path])}
-                            className={`block mb-4 transition-colors duration-300 ${
+                            className={`block mb-4 text-[.9rem] transition-colors duration-300 ${
                               location.pathname === s.path
                                 ? "text-[var(--primary-color)] font-medium"
                                 : "text-[#e9e7e2] hover:text-[var(--primary-color)]"
@@ -327,9 +327,9 @@ export default function Navbar() {
 
 
                       <div>
-                        <h3 className="text-[1.1rem] text-[var(--primary-color)] font-semibold mb-7">
+                        <h3 className="text-[1rem] text-[var(--primary-color)] font-semibold mb-5">
                           <Link to="/digital-growth&marketing#digital-growth-hero" className="flex items-center gap-1">
-                          Digital Growth & Marketing <FiChevronRight className="text-[1.3rem]" strokeWidth={3} />
+                          Digital Growth & Marketing <FiChevronRight className="text-[1rem]" strokeWidth={3} />
                           </Link>
                         </h3>
                         {digitalGrowth.map((s, i) => (
@@ -337,7 +337,7 @@ export default function Navbar() {
                             key={i}
                             to={s.path}
                             onClick={handleNavClick(s.path, heroMap[s.path])}
-                            className={`block mb-4 transition-colors duration-300 ${
+                            className={`block text-[.9rem] mb-4 transition-colors duration-300 ${
                               location.pathname === s.path
                                 ? "text-[var(--primary-color)] font-medium"
                                 : "text-[#e9e7e2] hover:text-[var(--primary-color)]"
@@ -349,9 +349,9 @@ export default function Navbar() {
                       </div>
 
                       <div>
-                        <h3 className="text-[1.1rem] text-[var(--primary-color)] font-semibold mb-7">
+                        <h3 className="text-[1rem] text-[var(--primary-color)] font-semibold mb-5">
                           <Link to="/business-strategy&consulting" className="flex items-center gap-1">
-                            Business Strategy & Consulting <FiChevronRight className="text-[1.3rem]" strokeWidth={3} />
+                            Business Strategy & Consulting <FiChevronRight className="text-[1rem]" strokeWidth={3} />
                           </Link>
                         </h3>
                         {businessStrategy.map((s, i) => (
@@ -359,7 +359,7 @@ export default function Navbar() {
                             key={i}
                             to={s.path}
                             onClick={handleNavClick(s.path, heroMap[s.path])}
-                            className={`block mb-4 transition-colors duration-300 ${
+                            className={`block mb-4 text-[.9rem] transition-colors duration-300 ${
                               location.pathname === s.path
                                 ? "text-[var(--primary-color)] font-medium"
                                 : "text-[#e9e7e2] hover:text-[var(--primary-color)]"
@@ -378,7 +378,7 @@ export default function Navbar() {
                 <Link
                   to={item.path}
                   onClick={handleNavClick(item.path, heroMap[item.path])}
-                  className={`text-sm xl:text-base transition-colors duration-300 ${
+                  className={`text-sm xl:text-[.9rem] transition-colors duration-300 ${
                     location.pathname === item.path
                       ? "text-[var(--primary-color)] font-medium"
                       : "text-white"
@@ -396,7 +396,7 @@ export default function Navbar() {
             key={item.id}
             to={item.path}
             onClick={handleNavClick(item.path, heroMap[item.path])}
-            className="px-6 py-3 border border-neutral-500 bg-neutral-900/50 text-[var(--primary-color)] text-xs font-bold tracking-widest uppercase font-medium rounded-[.5rem] transition-all duration-300"
+            className="px-6 py-2 border border-neutral-500 bg-neutral-900/50 text-[var(--primary-color)] text-[.7rem] font-bold tracking-widest uppercase font-medium rounded-[.5rem] transition-all duration-300"
           >
             {item.label}
           </Link>

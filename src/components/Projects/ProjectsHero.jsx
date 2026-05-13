@@ -116,7 +116,7 @@ const ProjectsHero = () => {
   return (
     <section 
       id='projects-hero' 
-      className="relative w-full min-h-[90vh] flex flex-col items-center justify-center px-4 py-20 overflow-hidden bg-black text-white"
+      className="relative w-full min-h-screen flex flex-col items-center justify-center px-4 py-20 overflow-hidden bg-black text-white"
     >
       
       {/* Background Glows (Same as before) */}
@@ -132,7 +132,7 @@ const ProjectsHero = () => {
           Our <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary-color)] via-[#02b96d] to-[#186d60]">Portfolio</span>
         </h1>
 
-        <p className="max-w-2xl text-slate-400 text-lg md:text-xl leading-relaxed mb-10">
+        <p className="max-w-3xl text-neutral-600 text-[.9rem] md:text-[.9rem] leading-relaxed mb-10">
           Crafting digital experiences that blend precision engineering with elite aesthetics. Explore our journey through technology and design.
         </p>
 
@@ -140,7 +140,7 @@ const ProjectsHero = () => {
                       <button className="cursor-pointer font-medium px-10 py-3 text-sm rounded-lg 
                         bg-gradient-to-r from-[var(--primary-color)] via-[#02b96d] to-[#186d60]
                         text-[black] transition font-bold flex items-center gap-2">
-                        Discover <ArrowDown strokeWidth={2.5} />
+                        Discover 
                       </button>
                     </a>
 
