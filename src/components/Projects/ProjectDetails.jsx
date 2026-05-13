@@ -6,6 +6,7 @@ import {
   FaGlobe, FaLayerGroup, FaInfoCircle
 } from "react-icons/fa";
 import ScrollToTopProjectsDetails from "./ScrollToTopProjectsDetails";
+import { ArrowLeftCircle, ArrowLeftFromLine } from "lucide-react";
 
 const ProjectDetails = () => {
   const location = useLocation();
@@ -41,12 +42,14 @@ const ProjectDetails = () => {
         </div>
         
         <div className="flex items-center gap-3 w-full md:w-auto">
-            <button 
-                onClick={() => navigate(-1)}
-                className="flex-1 md:flex-none px-8 py-3 rounded-[.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-[10px] uppercase tracking-[0.2em] font-bold"
-            >
-                Back
-            </button>
+            <button
+  onClick={() => navigate(-1)}
+  className="flex items-center justify-center gap-2 sm:gap-3 flex-1 cursor-pointer px-4 sm:px-6 md:px-8 py-3 rounded-[.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-xs sm:text-sm md:text-[13px] uppercase tracking-[0.15em] font-bold"
+>
+  <ArrowLeftFromLine className="w-4 h-4 sm:w-5 sm:h-5" />
+  
+  <span>Back</span>
+</button>
             <a 
               href={project.websiteLink} 
               target="_blank" 

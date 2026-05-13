@@ -235,12 +235,14 @@ const ProjectShowcase = () => {
               {/* Compact Details Section */}
               <div className="px-8 py-5 flex flex-col flex-grow">
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="text-[8px] rounded-[.3rem]  uppercase tracking-widest text-neutral-500 border border-neutral-800 px-2 py-1">
+                  <span className="text-[10px] rounded-[.3rem] font-bold flex items-center uppercase tracking-widest text-neutral-900 bg-gradient-to-r from-[var(--primary-color)] via-[#02b96d] to-[#186d60] px-2 py-1">
                     {project.industry}
                   </span>
-                  <span className="text-[8px] rounded-[.3rem] uppercase tracking-widest text-neutral-500 border border-neutral-800 px-2 py-1">
+
+                  <span className="text-[10px] rounded-[.3rem] font-bold flex items-center uppercase tracking-widest text-neutral-900 bg-gradient-to-r from-[var(--primary-color)] via-[#02b96d] to-[#186d60] px-2 py-1">
                     {project.clientCountry}
                   </span>
+                 
                 </div>
 
                 <h3 className="text-xl font-medium tracking-tight text-white  mb-3 transition-colors group-hover:text-neutral-300">
