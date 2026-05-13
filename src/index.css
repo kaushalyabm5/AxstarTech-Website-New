@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+/* ================= Root Variables ================= */
+:root {
+  --font-logo: "Montserrat", sans-serif;
+  --primary-color: #5dc192;
+}
+
+/* ================= Global Styles ================= */
+html {
+  scroll-behavior: smooth;
+  /* Hide scrollbar but still allow scrolling */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;    /* Firefox */
+} 
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+} 
+
+html{
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(
+    180deg,
+    #000000 0%,
+    #0b140c 35%,
+    #364437 70%,
+    #343f33 100%
+  );
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* prevent horizontal scroll */
+}
+
+/* ================= Fonts ================= */
+.logo {
+  font-family: var(--font-logo);
+}
+
+.cloudecode {
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* ================= Scrollbar Hide Class ================= */
+/* For elements where you want to hide scrollbar but keep scrollable
+.scrollbar-hide {
+  overflow: auto;           /* allow scrolling 
+  -ms-overflow-style: none; /* IE/Edge 
+  scrollbar-width: none;    /* Firefox 
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera 
+}
+
+section {
+  scroll-margin-top: 30px; /* adjust based on navbar height 
+} */
