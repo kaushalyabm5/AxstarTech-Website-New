@@ -91,11 +91,11 @@ const Technologies = () => {
                   className="
                   min-w-[110px] md:min-w-[140px]
                   h-24 md:h-28
-                  bg-black/10
+                  bg-[#080808]
                   backdrop-blur-md
                   border-[1px]
                   rounded-[1rem]
-                  border-emerald-500/20
+                  border-white/10
                   flex flex-col items-center justify-center
                   transition duration-300
                   "
