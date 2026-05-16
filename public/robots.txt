@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /icon5.png
+Disallow: /admin
+Disallow: /admin/
 
 # Sitemap Location
 Sitemap: https://axstartech.com/sitemap.xml

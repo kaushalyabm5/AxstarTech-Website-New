@@ -1,5 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
+import { AuthProvider } from "./context/AuthContext";
+import AdminLogin from "./components/Admin/AdminLogin";
+import AdminLayout from "./components/Admin/AdminLayout";
+import ProtectedRoute from "./components/Admin/ProtectedRoute";
 
 import HomePage from "./components/Home/HomePage";
 import AboutPage from "./components/About/AboutPage";
@@ -112,9 +116,33 @@ const AppWrapper = () => {
   );
 };
 
+const AppContent = () => {
+  const location = useLocation();
+
+  if (location.pathname.startsWith('/admin')) {
+    return (
+      <Routes>
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route
+          path="/admin/*"
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    );
+  }
+
+  return <AppWrapper />;
+};
+
 const App = () => (
   <Router>
-    <AppWrapper />
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   </Router>
 );
 
