@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { 
-  FaChartLine, FaCheckCircle, FaClock, FaUser, 
-  FaExternalLinkAlt, FaChevronLeft, FaChevronRight,
-  FaGlobe, FaLayerGroup, FaInfoCircle
+  FaChartLine, FaCheckCircle, FaClock,
+  FaChevronLeft, FaChevronRight,
+  FaGlobe, FaLayerGroup
 } from "react-icons/fa";
 import ScrollToTopProjectsDetails from "./ScrollToTopProjectsDetails";
-import { ArrowLeftCircle, ArrowLeftFromLine } from "lucide-react";
+import { ArrowLeftFromLine } from "lucide-react";
 
 const ProjectDetails = () => {
   const location = useLocation();
@@ -97,11 +97,10 @@ const ProjectDetails = () => {
           </div>
 
           {/* QUICK STATS BENTO */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <StatBox icon={<FaChartLine />} label="Project Health" value={project.projectSuccessRate} />
             <StatBox icon={<FaClock />} label="Lifecycle" value={project.duration} />
             <StatBox icon={<FaCheckCircle />} label="Deployment" value={project.deliveryTime} />
-            <StatBox icon={<FaUser />} label="Principal" value={project.clientName} />
           </div>
 
           {/* PROJECT OVERVIEW */}
@@ -157,17 +156,6 @@ const ProjectDetails = () => {
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* CLIENT PROFILE COMPACT */}
-          <div className="border rounded-[1rem] border-white/5 p-[0px]">
-              <div className="bg-[#080808] rounded-[1rem] p-6 flex items-center gap-5">
-                <img src={project.clientImg} className="w-14 h-14 grayscale-0 rounded-full brightness-125 border border-white/10 object-cover" alt="Client" />
-                <div>
-                    <p className="text-[11px] font-black uppercase tracking-[0.2em] text-white">{project.clientName}</p>
-                    <p className="text-[9px] text-emerald-500 uppercase font-bold mt-1 tracking-widest">Verified Client</p>
-                </div>
-              </div>
           </div>
 
         </div>

@@ -27,8 +27,6 @@ const mapProject = (item) => ({
   status: item.status,
   projectSuccessRate: item.project_success_rate,
   deliveryTime: item.delivery_time,
-  clientName: item.client_name,
-  clientImg: item.client_img,
   websiteLink: item.website_link,
 });
 

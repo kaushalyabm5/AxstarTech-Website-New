@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { X, Upload, Loader, User } from 'lucide-react';
+import { X, Upload, Loader } from 'lucide-react';
 import { supabase } from '../../../lib/supabase';
 
 const CATEGORIES = [
@@ -45,7 +45,6 @@ const PortfolioForm = ({ item, onClose }) => {
     status: item?.status ?? 'Completed',
     project_success_rate: item?.project_success_rate ?? '',
     delivery_time: item?.delivery_time ?? '',
-    client_name: item?.client_name ?? '',
     website_link: item?.website_link ?? '',
     is_latest_project: item?.is_latest_project ?? false,
     latest_project_order: item?.latest_project_order?.toString() ?? '',
@@ -61,22 +60,15 @@ const PortfolioForm = ({ item, onClose }) => {
     item?.thumbnail_url ? `existing:${item.thumbnail_url}` : null
   );
 
-  // ─── Client Image ─────────────────────────────────────────────────
-  const [clientImageFile, setClientImageFile]       = useState(null);
-  const [clientImagePreview, setClientImagePreview] = useState(item?.client_img ?? null);
-  const existingClientImg = item?.client_img ?? null;
-
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState('');
 
   // Refs for cleanup of object URLs
   const newPreviewsRef    = useRef([]);
-  const clientPreviewRef  = useRef(null);
 
   useEffect(() => {
     return () => {
       newPreviewsRef.current.forEach(URL.revokeObjectURL);
-      if (clientPreviewRef.current) URL.revokeObjectURL(clientPreviewRef.current);
     };
   }, []);
 
@@ -127,16 +119,6 @@ const PortfolioForm = ({ item, onClose }) => {
     });
   };
 
-  const handleClientImage = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    if (clientPreviewRef.current) URL.revokeObjectURL(clientPreviewRef.current);
-    const preview = URL.createObjectURL(file);
-    clientPreviewRef.current = preview;
-    setClientImageFile(file);
-    setClientImagePreview(preview);
-  };
-
   const isFeatured = (source, id) =>
     featuredKey === `${source}:${id}`;
 
@@ -160,20 +142,6 @@ const PortfolioForm = ({ item, onClose }) => {
     return urls;
   };
 
-  const uploadClientImage = async (projectId) => {
-    if (!clientImageFile) return existingClientImg;
-    const ext  = clientImageFile.name.split('.').pop();
-    const path = `clients/${projectId}/client.${ext}`;
-    const { error: uploadError } = await supabase.storage
-      .from('portfolio-images')
-      .upload(path, clientImageFile, { upsert: true });
-    if (uploadError) throw uploadError;
-    const { data: { publicUrl } } = supabase.storage
-      .from('portfolio-images')
-      .getPublicUrl(path);
-    return publicUrl;
-  };
-
   // ─── Submit ───────────────────────────────────────────────────────
 
   const handleSubmit = async (e) => {
@@ -184,10 +152,7 @@ const PortfolioForm = ({ item, onClose }) => {
     try {
       const projectId = item?.id ?? crypto.randomUUID();
 
-      const [newImageUrls, clientImgUrl] = await Promise.all([
-        uploadProjectImages(projectId),
-        uploadClientImage(projectId),
-      ]);
+      const newImageUrls = await uploadProjectImages(projectId);
 
       const allImageUrls = [...existingImages, ...newImageUrls];
 
@@ -216,8 +181,6 @@ const PortfolioForm = ({ item, onClose }) => {
         status: form.status,
         project_success_rate: form.project_success_rate,
         delivery_time: form.delivery_time,
-        client_name: form.client_name,
-        client_img: clientImgUrl,
         website_link: form.website_link,
         is_latest_project: form.is_latest_project,
         latest_project_order: form.is_latest_project && form.latest_project_order !== ''
@@ -371,47 +334,6 @@ const PortfolioForm = ({ item, onClose }) => {
               placeholder={'Fully Responsive\nSEO-friendly\nCross-browser compatibility'}
               className="w-full bg-neutral-900/50 border border-neutral-800 rounded-xl p-3 text-neutral-200 text-sm focus:outline-none focus:border-emerald-500 transition-colors resize-none placeholder:text-neutral-700"
             />
-          </div>
-
-          {/* Client Name + Client Photo Upload */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Label>Client Name</Label>
-              <TextInput name="client_name" value={form.client_name} onChange={handleChange} placeholder="Client name" />
-            </div>
-
-            <div>
-              <Label>Client Photo</Label>
-              <div className="flex items-center gap-3 mt-1">
-                {/* Circle preview */}
-                <div className="w-11 h-11 rounded-full overflow-hidden bg-neutral-900 border border-neutral-800 flex-shrink-0">
-                  {clientImagePreview ? (
-                    <img
-                      src={clientImagePreview}
-                      alt="Client"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <User size={15} className="text-neutral-700" />
-                    </div>
-                  )}
-                </div>
-                {/* Upload trigger */}
-                <label className="flex-1 flex items-center gap-2 px-3 py-2 rounded-xl border border-dashed border-neutral-800 cursor-pointer hover:border-neutral-600 hover:bg-neutral-900/30 transition-all min-w-0">
-                  <Upload size={12} className="text-neutral-600 flex-shrink-0" />
-                  <span className="text-xs text-neutral-600 truncate">
-                    {clientImageFile ? clientImageFile.name : 'Upload photo'}
-                  </span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={handleClientImage}
-                  />
-                </label>
-              </div>
-            </div>
           </div>
 
           {/* Website Link */}
