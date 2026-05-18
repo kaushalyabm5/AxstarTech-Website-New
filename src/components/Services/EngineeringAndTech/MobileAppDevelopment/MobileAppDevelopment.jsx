@@ -29,7 +29,7 @@ const MobileAppDevelopment = () => {
       <Helmet>
         <title>AI-Powered Mobile App Development in Sri Lanka | Axstar</title>
         <meta name="description" content="Axstar builds scalable Flutter, iOS, and Android mobile apps. We deliver AI-powered, cross-platform experiences with intuitive UI/UX for global businesses." />
-        <meta property="og:image" content="https://axstartech.com/axstartechog.png" />
+        <meta property="og:image" content="https://axstartech.com/axstartechog.webp" />
         <meta property="og:title" content="AI-Powered Mobile App Development in Sri Lanka | Axstar" />
         <meta property="og:description" content="Axstar builds scalable Flutter, iOS, and Android mobile apps. We deliver AI-powered, cross-platform experiences with intuitive UI/UX for global businesses." />
       </Helmet>

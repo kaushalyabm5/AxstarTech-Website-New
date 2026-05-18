@@ -20,7 +20,7 @@ const AboutPage = () => {
       <Helmet>
         <title>About Axstar | Sri Lanka's Leading AI Software Company</title>
         <meta name="description" content="Meet Axstar, a Colombo-based AI-powered software engineering team building scalable web applications, mobile apps, SaaS platforms, and digital solutions for modern businesses." />
-        <meta property="og:image" content="https://axstartech.com/axstartechog.png" />
+        <meta property="og:image" content="https://axstartech.com/axstartechog.webp" />
         <meta property="og:title" content="About Axstar | Sri Lanka's Leading AI Software Company" />
         <meta property="og:description" content="Meet Axstar, a Colombo-based AI-powered software engineering team building scalable web applications, mobile apps, SaaS platforms, and digital solutions for modern businesses." />
       </Helmet>

@@ -49,7 +49,7 @@ const ContactPage = () => {
       <Helmet>
         <title>Contact Axstar | AI Software & App Development in Colombo</title>
         <meta name="description" content="Ready to build your next digital product? Contact Axstar in Colombo for a free consultation on AI solutions, web apps, mobile development, and MVP services." />
-        <meta property="og:image" content="https://axstartech.com/axstartechog.png" />
+        <meta property="og:image" content="https://axstartech.com/axstartechog.webp" />
         <meta property="og:title" content="Contact Axstar | AI Software & App Development in Colombo" />
         <meta property="og:description" content="Ready to build your next digital product? Contact Axstar in Colombo for a free consultation on AI solutions, web apps, mobile development, and MVP services." />
         <script type="application/ld+json">

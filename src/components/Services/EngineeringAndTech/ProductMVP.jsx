@@ -20,7 +20,7 @@ const ProductMVP = () => {
       <Helmet>
         <title>Rapid MVP Development in Sri Lanka | Axstar</title>
         <meta name="description" content="Need to validate your startup idea quickly? Build a scalable, AI-powered MVP in weeks with Axstar’s expert software engineers in Sri Lanka." />
-        <meta property="og:image" content="https://axstartech.com/axstartechog.png" />
+        <meta property="og:image" content="https://axstartech.com/axstartechog.webp" />
         <meta property="og:title" content="Rapid MVP Development in Sri Lanka | Axstar" />
         <meta property="og:description" content="Need to validate your startup idea quickly? Build a scalable, AI-powered MVP in weeks with Axstar’s expert software engineers in Sri Lanka." />
       </Helmet>

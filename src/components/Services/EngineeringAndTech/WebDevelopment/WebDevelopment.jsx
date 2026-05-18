@@ -26,7 +26,7 @@ const WebDevelopment = () => {
       <Helmet>
         <title>AI-Powered Web App & SaaS Development in Sri Lanka | Axstar</title>
         <meta name="description" content="Build secure, lightning-fast AI-powered web applications and SaaS platforms with Axstar’s expert software engineers in Sri Lanka." />
-        <meta property="og:image" content="https://axstartech.com/axstartechog.png" />
+        <meta property="og:image" content="https://axstartech.com/axstartechog.webp" />
         <meta property="og:title" content="AI-Powered Web App & SaaS Development in Sri Lanka | Axstar" />
         <meta property="og:description" content="Build secure, lightning-fast AI-powered web applications and SaaS platforms with Axstar’s expert software engineers in Sri Lanka." />
       </Helmet>
