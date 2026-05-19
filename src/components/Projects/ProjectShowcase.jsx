@@ -7,8 +7,8 @@ const categories = [
   "Web Development",
   "Mobile App Development",
   "Social Media",
-  "Ui Ux Design",
-  "Ecommerse Website",
+  "UI UX Design",
+  "Ecommerce Website",
 ];
 
 const mapProject = (item) => ({
