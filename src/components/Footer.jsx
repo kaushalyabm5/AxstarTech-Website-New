@@ -74,7 +74,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-[#050505] z-10 text-gray-400 px-6 md:px-12 lg:px-24 py-16">
+    <footer id="footer" className="relative bg-[#050505] z-10 text-gray-400 px-6 md:px-12 lg:px-24 py-16">
       <div className="max-w-7xl mx-auto">
         
         {/* Header Section */}
@@ -122,9 +122,9 @@ const Footer = () => {
               <ul className="space-y-4 text-[14px]">
                 {category.links.map((link) => (
                   <li key={link.name}>
-                    <Link to={link.path} className="text-neutral-500 hover:text-[var(--primary-color)] transition-colors block leading-snug">
+                    <a href={link.path} className="text-neutral-500 hover:text-[var(--primary-color)] transition-colors block leading-snug">
                       {link.name}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -148,7 +148,7 @@ const Footer = () => {
                  <Phone size={14} className="text-[var(--primary-color)]" /> +94 711 191 251
                </a>
                <a href="mailto:hello@axstar.com" className="flex items-center gap-2 text-neutral-500 hover:text-[var(--primary-color)] transition-colors">
-                 <Mail size={14} className="text-[var(--primary-color)]" /> hello@axstar.com
+                 <Mail size={14} className="text-[var(--primary-color)]" /> info@axstartech.com
                </a>
             </div>
           </div>

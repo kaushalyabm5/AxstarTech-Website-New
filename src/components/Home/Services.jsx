@@ -80,20 +80,20 @@ const ParticleBackground = () => {
 };
 
 const services = [
-  { icon: <FaCode />, title: "Web Development", description: "Build responsive, high-performance websites optimized for speed and user engagement." },
-  { icon: <FaMobileAlt />, title: "Mobile App Development", description: "Native and cross-platform iOS & Android apps designed for business growth." },
-  { icon: <FaRocket />, title: "Product MVP Development", description: "Quickly validate your market ideas with robust minimum viable products." },
-  { icon: <FaPencilRuler />, title: "UI/UX Design", description: "Create intuitive, high-fidelity digital experiences that users love." },
-  { icon: <FaLaptopCode />, title: "Custom Software", description: "Tailored enterprise solutions designed to meet specific business needs." },
-  { icon: <FaRobot />, title: "AI & Automation", description: "Leverage smart automation and AI to improve operational efficiency." },
-  { icon: <FaShoppingCart />, title: "E-commerce Platforms", description: "Scalable online stores and marketplace solutions for modern retail." },
-  { icon: <FaBullhorn />, title: "Social Media Management", description: "Strategic content and management to grow brand presence and engagement." },
-  { icon: <FaSearch />, title: "SEO Optimization", description: "Increase organic visibility and traffic with data-driven search strategies." },
-  { icon: <FaProjectDiagram />, title: "Product Strategy", description: "Align your product roadmap with long-term business goals and market trends." },
-  { icon: <FaChartLine />, title: "Growth Strategy", description: "Identify and execute scalable, profitable business models for expansion." },
-  { icon: <FaSyncAlt />, title: "Digital Transformation", description: "Guide your business through modern technology adoption and legacy migration." },
-  { icon: <FaDatabase />, title: "Data Consulting", description: "Make informed data-driven decisions and optimize your technology stack." },
-  { icon: <FaLightbulb />, title: "Startup Advisory", description: "Strategic support for startups covering execution, growth, and fundability." },
+  { icon: <FaCode />, title: "Web Development", description: "Build responsive, high-performance websites optimized for speed and user engagement.", linkto: "/web-development" },
+  { icon: <FaMobileAlt />, title: "Mobile App Development", description: "Native and cross-platform iOS & Android apps designed for business growth.", linkto: "/mobile-app-development" },
+  { icon: <FaRocket />, title: "Product MVP Development", description: "Quickly validate your market ideas with robust minimum viable products.", linkto: "/engineering&technology#product-mvp" },
+  { icon: <FaPencilRuler />, title: "UI/UX Design", description: "Create intuitive, high-fidelity digital experiences that users love.", linkto: "/engineering&technology#ui-ux" },
+  { icon: <FaLaptopCode />, title: "Custom Software", description: "Tailored enterprise solutions designed to meet specific business needs.", linkto: "/engineering&technology#custom-software" },
+  { icon: <FaRobot />, title: "AI & Automation", description: "Leverage smart automation and AI to improve operational efficiency.", linkto: "/ai-driven-solutions" },
+  { icon: <FaShoppingCart />, title: "E-commerce Platforms", description: "Scalable online stores and marketplace solutions for modern retail.", linkto: "/e-commerce-platforms&solutions" },
+  { icon: <FaBullhorn />, title: "Social Media Management", description: "Strategic content and management to grow brand presence and engagement.", linkto: "/digital-growth&marketing#social-media-management" },
+  { icon: <FaSearch />, title: "SEO Optimization", description: "Increase organic visibility and traffic with data-driven search strategies.", linkto: "/digital-growth&marketing#seo" },
+  { icon: <FaProjectDiagram />, title: "Product Strategy", description: "Align your product roadmap with long-term business goals and market trends.", linkto: "/digital-growth&marketing#product-stratagy&digital-transformation" },
+  { icon: <FaChartLine />, title: "Growth Strategy", description: "Identify and execute scalable, profitable business models for expansion.", linkto: "/business-strategy&consulting#section1" },
+  { icon: <FaSyncAlt />, title: "Digital Transformation", description: "Guide your business through modern technology adoption and legacy migration.", linkto: "/business-strategy&consulting#section2" },
+  { icon: <FaDatabase />, title: "Data Consulting", description: "Make informed data-driven decisions and optimize your technology stack.", linkto: "/business-strategy&consulting#section4" },
+  { icon: <FaLightbulb />, title: "Startup Advisory", description: "Strategic support for startups covering execution, growth, and fundability.", linkto: "/business-strategy&consulting#section5" },
 ];
 
 const Services = () => {
@@ -190,9 +190,13 @@ const Services = () => {
                   </div>
 
                   <div className="w-full mt-auto">
-                    <button className={`w-full cursor-pointer py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 ${isCenter ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500 hover:text-black' : 'bg-zinc-900 text-zinc-500 border border-zinc-800'}`}>
+                    <a href={service.linkto}>
+                      <button className={`w-full cursor-pointer py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 ${isCenter ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500 hover:text-black' : 'bg-zinc-900 text-zinc-500 border border-zinc-800'}`}>
                       <FiExternalLink size={12}/> View More
                     </button>
+
+                    </a>
+                    
                   </div>
                 </div>
               </div>

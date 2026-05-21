@@ -24,16 +24,16 @@ const About = () => {
           {/* LEFT: MINIMAL TEXT CONTENT */}
           <div className="md:col-span-5 flex flex-col justify-between">
             <div className="space-y-8">
-              <p className="text-xl md:text-2xl text-gray-400 leading-snug">
-                Axstar is a strategic technology partner. We specialize in custom software and digital transformation that scale.
+              <p className="text-xl md:text-[1.4rem] text-base text-gray-400 leading-snug">
+                Axstar is a premier strategic technology partner. We specialize in engineering custom software and driving digital transformations engineered to scale alongside your ambition.
               </p>
               
-              <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-sm">
+              <p className="text-gray-500 text-sm md:text-justify leading-relaxed max-w-sm">
                 Our approach is simple: remove complexity, optimize performance, and deliver solutions that are smarter and faster. No fluff, just results.
               </p>
             </div>
 
-            <div className="mt-12 md:mt-0">
+            <div className="mt-10 md:mt-0">
               <Link to="/about">
                                 <button className="group cursor-pointer relative hover:text-transparent inline-flex items-center gap-4 px-10 py-4 overflow-hidden rounded-full border border-[var(--primary-color)] text-[var(--primary-color)] transition-all duration-300 hover:border-[var(--primary-color)]">
                               <span className="relative z-10 text-xs font-bold uppercase tracking-widest">Explore More</span>
