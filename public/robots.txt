@@ -3,6 +3,7 @@ Allow: /
 Allow: /icon5.png
 Disallow: /admin
 Disallow: /admin/
+Disallow: /portfolio
 
 # Sitemap Location
 Sitemap: https://axstartech.com/sitemap.xml

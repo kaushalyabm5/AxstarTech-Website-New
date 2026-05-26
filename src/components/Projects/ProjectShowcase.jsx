@@ -30,7 +30,7 @@ const mapProject = (item) => ({
   websiteLink: item.website_link,
 });
 
-const ProjectShowcase = () => {
+const ProjectShowcase = ({ showAll = false }) => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [projects, setProjects] = useState([]);
@@ -38,15 +38,21 @@ const ProjectShowcase = () => {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const { data } = await supabase
+      let query = supabase
         .from("portfolio_items")
         .select("*")
         .order("created_at", { ascending: false });
+
+      if (!showAll) {
+        query = query.or("visibility.eq.public,visibility.is.null");
+      }
+
+      const { data } = await query;
       setProjects((data ?? []).map(mapProject));
       setLoading(false);
     };
     fetchProjects();
-  }, []);
+  }, [showAll]);
 
   const handleDetails = (project) => {
     navigate("/project-details", { state: project });

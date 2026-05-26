@@ -24,6 +24,7 @@ import Loading from "./components/Loading";
 import Footer from "./components/Footer";
 import ContactPage from "./components/Contact/ContactPage";
 import ProjectsPage from "./components/Projects/ProjectsPage";
+import PrivatePortfolioPage from "./components/Projects/PrivatePortfolioPage";
 import ProjectDetails from "./components/Projects/ProjectDetails";
 import WhatsAppPopup from "./components/WhatsAppPopup";
 import CareersPage from "./components/Careers/CareersPage";
@@ -116,6 +117,44 @@ const AppWrapper = () => {
   );
 };
 
+const PrivatePortfolioWrapper = () => {
+  const scrollRef = useRef();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <Loading />;
+
+  return (
+    <>
+      <ScrollToTop scrollRef={scrollRef} />
+      <SmoothScroll ref={scrollRef}>
+        <div
+          className="
+            min-h-screen
+            w-full
+            bg-cover
+            bg-center
+            bg-fixed
+            bg-blend-darken
+            bg-[url('/src/assets/mobile-bg-4.jpeg')]
+            md:bg-[url('/src/assets/hero-bg-23.png')]
+          "
+        >
+          <div className="max-w-full mx-auto">
+            <Routes>
+              <Route path="/portfolio" element={<PrivatePortfolioPage />} />
+            </Routes>
+          </div>
+        </div>
+      </SmoothScroll>
+    </>
+  );
+};
+
 const AppContent = () => {
   const location = useLocation();
 
@@ -133,6 +172,10 @@ const AppContent = () => {
         />
       </Routes>
     );
+  }
+
+  if (location.pathname === '/portfolio') {
+    return <PrivatePortfolioWrapper />;
   }
 
   return <AppWrapper />;

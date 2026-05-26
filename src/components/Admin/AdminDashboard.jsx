@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Briefcase, Users, ArrowRight, Clock } from 'lucide-react';
+import { Briefcase, Users, ArrowRight, Clock, Eye, EyeOff } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
-const StatCard = ({ label, value, icon: Icon, to, loading }) => (
+const StatCard = ({ label, value, icon: Icon, to, loading, iconColor = '#5dc192' }) => (
   <Link
     to={to}
     className="group bg-[#111111] border border-neutral-800 rounded-2xl p-6 hover:border-neutral-700 transition-all duration-300 block"
   >
     <div className="flex items-center justify-between mb-5">
-      <div className="w-9 h-9 rounded-xl bg-[#5dc192]/10 border border-[#5dc192]/15 flex items-center justify-center">
-        <Icon size={15} className="text-[#5dc192]" />
+      <div
+        className="w-9 h-9 rounded-xl flex items-center justify-center"
+        style={{ backgroundColor: `${iconColor}1a`, border: `1px solid ${iconColor}26` }}
+      >
+        <Icon size={15} style={{ color: iconColor }} />
       </div>
       <ArrowRight size={14} className="text-neutral-700 group-hover:text-neutral-400 group-hover:translate-x-0.5 transition-all duration-200" />
     </div>
@@ -24,7 +27,7 @@ const StatCard = ({ label, value, icon: Icon, to, loading }) => (
 );
 
 const AdminDashboard = () => {
-  const [stats, setStats] = useState({ portfolio: 0, careers: 0 });
+  const [stats, setStats] = useState({ portfolio: 0, publicPortfolio: 0, privatePortfolio: 0, careers: 0 });
   const [recentApplications, setRecentApplications] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -32,10 +35,14 @@ const AdminDashboard = () => {
     const fetchStats = async () => {
       const [
         { count: portfolioCount },
+        { count: publicCount },
+        { count: privateCount },
         { count: careersCount },
         { data: recent },
       ] = await Promise.all([
         supabase.from('portfolio_items').select('*', { count: 'exact', head: true }),
+        supabase.from('portfolio_items').select('*', { count: 'exact', head: true }).eq('visibility', 'public'),
+        supabase.from('portfolio_items').select('*', { count: 'exact', head: true }).eq('visibility', 'private'),
         supabase.from('career_applications').select('*', { count: 'exact', head: true }),
         supabase
           .from('career_applications')
@@ -44,7 +51,12 @@ const AdminDashboard = () => {
           .limit(5),
       ]);
 
-      setStats({ portfolio: portfolioCount ?? 0, careers: careersCount ?? 0 });
+      setStats({
+        portfolio: portfolioCount ?? 0,
+        publicPortfolio: publicCount ?? 0,
+        privatePortfolio: privateCount ?? 0,
+        careers: careersCount ?? 0,
+      });
       setRecentApplications(recent ?? []);
       setLoading(false);
     };
@@ -61,7 +73,7 @@ const AdminDashboard = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         <StatCard
           label="Portfolio Items"
           value={stats.portfolio}
@@ -75,6 +87,22 @@ const AdminDashboard = () => {
           icon={Users}
           to="/admin/careers"
           loading={loading}
+        />
+        <StatCard
+          label="Public Portfolio"
+          value={stats.publicPortfolio}
+          icon={Eye}
+          to="/admin/portfolio?visibility=public"
+          loading={loading}
+          iconColor="#34d399"
+        />
+        <StatCard
+          label="Private Portfolio"
+          value={stats.privatePortfolio}
+          icon={EyeOff}
+          to="/admin/portfolio?visibility=private"
+          loading={loading}
+          iconColor="#f87171"
         />
       </div>
 

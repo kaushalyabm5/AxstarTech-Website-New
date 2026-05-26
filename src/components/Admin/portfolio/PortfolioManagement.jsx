@@ -1,14 +1,23 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Plus, Pencil, Trash2, ExternalLink, Loader } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
+import { Plus, Pencil, Trash2, ExternalLink, Loader, Eye, EyeOff } from 'lucide-react';
 import { supabase } from '../../../lib/supabase';
 import PortfolioForm from './PortfolioForm';
 
+const VISIBILITY_FILTERS = ['all', 'public', 'private'];
+
 const PortfolioManagement = () => {
+  const [searchParams] = useSearchParams();
+  const initialFilter = VISIBILITY_FILTERS.includes(searchParams.get('visibility'))
+    ? searchParams.get('visibility')
+    : 'all';
+
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [formOpen, setFormOpen] = useState(false);
   const [editItem, setEditItem] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
+  const [visibilityFilter, setVisibilityFilter] = useState(initialFilter);
 
   const fetchItems = useCallback(async () => {
     setLoading(true);
@@ -62,9 +71,13 @@ const PortfolioManagement = () => {
     setFormOpen(true);
   };
 
+  const filteredItems = visibilityFilter === 'all'
+    ? items
+    : items.filter((i) => (i.visibility ?? 'public') === visibilityFilter);
+
   return (
     <div className="p-6 md:p-8 w-full">
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between mb-5">
         <div>
           <h2 className="text-xl font-light text-white tracking-tight">Portfolio</h2>
           <p className="text-neutral-700 text-[10px] mt-1 uppercase tracking-widest">
@@ -80,6 +93,27 @@ const PortfolioManagement = () => {
         </button>
       </div>
 
+      {/* Visibility filter */}
+      <div className="flex items-center gap-1.5 mb-6">
+        {VISIBILITY_FILTERS.map((f) => (
+          <button
+            key={f}
+            onClick={() => setVisibilityFilter(f)}
+            className={`px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-widest transition-all cursor-pointer ${
+              visibilityFilter === f
+                ? 'bg-[#5dc192]/15 border border-[#5dc192]/40 text-[#5dc192]'
+                : 'border border-neutral-800 text-neutral-600 hover:border-neutral-700 hover:text-neutral-400'
+            }`}
+          >
+            {f === 'all'
+              ? `All (${items.length})`
+              : f === 'public'
+                ? `Public (${items.filter((i) => (i.visibility ?? 'public') === 'public').length})`
+                : `Private (${items.filter((i) => (i.visibility ?? 'public') === 'private').length})`}
+          </button>
+        ))}
+      </div>
+
       {loading ? (
         <div className="space-y-3">
           {[...Array(4)].map((_, i) => (
@@ -89,21 +123,23 @@ const PortfolioManagement = () => {
             />
           ))}
         </div>
-      ) : items.length === 0 ? (
+      ) : filteredItems.length === 0 ? (
         <div className="bg-[#111111] border border-neutral-800 rounded-2xl py-20 text-center">
           <p className="text-neutral-700 text-[10px] uppercase tracking-widest mb-4">
-            No portfolio items yet
+            {items.length === 0 ? 'No portfolio items yet' : `No ${visibilityFilter} projects`}
           </p>
-          <button
-            onClick={openAdd}
-            className="text-[#5dc192] text-xs underline underline-offset-4 cursor-pointer hover:text-[#02b96d] transition-colors"
-          >
-            Add your first project
-          </button>
+          {items.length === 0 && (
+            <button
+              onClick={openAdd}
+              className="text-[#5dc192] text-xs underline underline-offset-4 cursor-pointer hover:text-[#02b96d] transition-colors"
+            >
+              Add your first project
+            </button>
+          )}
         </div>
       ) : (
         <div className="space-y-2">
-          {items.map((item) => (
+          {filteredItems.map((item) => (
             <div
               key={item.id}
               className="flex items-center gap-4 bg-[#111111] border border-neutral-900 rounded-2xl p-4 hover:border-neutral-800 transition-colors"
@@ -147,6 +183,18 @@ const PortfolioManagement = () => {
                         Latest
                       </span>
                     </>
+                  )}
+                  <span className="text-neutral-800">·</span>
+                  {(item.visibility ?? 'public') === 'public' ? (
+                    <span className="inline-flex items-center gap-1 text-[9px] text-emerald-500/70 border border-emerald-500/20 bg-emerald-500/5 px-1.5 py-0.5 rounded-md uppercase tracking-wider">
+                      <Eye size={8} />
+                      Public
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 text-[9px] text-red-400/80 border border-red-500/20 bg-red-500/5 px-1.5 py-0.5 rounded-md uppercase tracking-wider">
+                      <EyeOff size={8} />
+                      Private
+                    </span>
                   )}
                 </div>
               </div>

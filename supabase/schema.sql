@@ -33,6 +33,14 @@ alter table portfolio_items
   add column if not exists is_latest_project boolean default false,
   add column if not exists latest_project_order integer;
 
+-- Migration: add visibility field for private/public portfolio filtering
+alter table portfolio_items
+  add column if not exists visibility text default 'public'
+    check (visibility in ('public', 'private'));
+
+-- Set all existing rows to 'public' so the current public website does not break
+update portfolio_items set visibility = 'public' where visibility is null;
+
 alter table portfolio_items enable row level security;
 
 -- Public can read portfolio items (for the frontend)

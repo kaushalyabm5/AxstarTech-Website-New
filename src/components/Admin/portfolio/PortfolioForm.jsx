@@ -48,6 +48,7 @@ const PortfolioForm = ({ item, onClose }) => {
     website_link: item?.website_link ?? '',
     is_latest_project: item?.is_latest_project ?? false,
     latest_project_order: item?.latest_project_order?.toString() ?? '',
+    visibility: item?.visibility ?? 'public',
   });
 
   // ─── Project Images ───────────────────────────────────────────────
@@ -188,6 +189,7 @@ const PortfolioForm = ({ item, onClose }) => {
           : null,
         thumbnail_url: thumbnailUrl,
         image_urls: allImageUrls,
+        visibility: form.visibility,
       };
 
       const { error: dbError } = isEditing
@@ -340,6 +342,51 @@ const PortfolioForm = ({ item, onClose }) => {
           <div>
             <Label>Website Link</Label>
             <TextInput name="website_link" value={form.website_link} onChange={handleChange} placeholder="https://..." />
+          </div>
+
+          {/* ─── Visibility ──────────────────────────────────────────── */}
+          <div className="border border-neutral-800/70 rounded-2xl p-5 bg-neutral-900/20">
+            <p className="text-[10px] uppercase tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-[#5dc192] via-[#02b96d] to-[#186d60] mb-1">
+              Visibility *
+            </p>
+            <p className="text-[10px] text-neutral-600 mb-4">
+              Public items appear on the website. Private items are hidden from the public.
+            </p>
+            <div className="flex gap-4">
+              {['public', 'private'].map((v) => (
+                <label
+                  key={v}
+                  className={`flex items-center gap-2.5 cursor-pointer px-4 py-2.5 rounded-xl border transition-all duration-200 ${
+                    form.visibility === v
+                      ? 'border-[#5dc192] bg-[#5dc192]/10'
+                      : 'border-neutral-800 hover:border-neutral-700'
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="visibility"
+                    value={v}
+                    checked={form.visibility === v}
+                    onChange={handleChange}
+                    className="hidden"
+                  />
+                  <span
+                    className={`w-3.5 h-3.5 rounded-full border flex-shrink-0 flex items-center justify-center transition-colors ${
+                      form.visibility === v
+                        ? 'border-[#5dc192] bg-[#5dc192]'
+                        : 'border-neutral-700 bg-transparent'
+                    }`}
+                  >
+                    {form.visibility === v && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-black" />
+                    )}
+                  </span>
+                  <span className={`text-xs font-medium capitalize ${form.visibility === v ? 'text-[#5dc192]' : 'text-neutral-500'}`}>
+                    {v}
+                  </span>
+                </label>
+              ))}
+            </div>
           </div>
 
           {/* ─── Latest Projects ─────────────────────────────────────── */}
